@@ -73,3 +73,15 @@ find_package(Pangolin REQUIRED)
 ```
 
 Finally, build the ROS package with build_ros.sh inside of /ORB_SLAM3 (make sure it is executable first). You should now be able to run the ROS nodes as per the examples in the original ORB_SLAM3 repo.
+
+
+
+## ROS Example
+Open 3 Terminals and run
+```docker exec -it orbslam3 bash```
+
+in the
+1. ```roscore```
+2. ```rosrun ORB_SLAM3 Stereo_Inertial Vocabulary/ORBvoc.txt Examples/Stereo-Inertial/EuRoC.yaml true```
+3. ```rosbag play --pause ../../../Datasets/EuRoC/V1_02_medium.bag /cam0/image_raw:=/camera/left/image_raw /cam1/image_raw:=/camera/right/image_raw /imu0:=/imu```
+
