@@ -36,13 +36,12 @@ docker run -td --privileged --net=host --ipc=host \
     -e "XAUTHORITY=$XAUTH" \
     -e ROS_IP=127.0.0.1 \
     --cap-add=SYS_PTRACE \
-    -v `pwd`/Datasets:/Datasets \
+    -v /home/val89665/Datasets:/Datasets \
     -v /etc/group:/etc/group:ro \
     -v `pwd`/ORB_SLAM3:/ORB_SLAM3 \
     jahaniam/orbslam3:ubuntu20_noetic_cpu bash
     
 # Git pull orbslam and compile
-docker exec -it orbslam3 bash -i -c "git clone -b add_euroc_example.sh git@github.com:jahaniam/ORB_SLAM3.git /ORB_SLAM3 && cd /ORB_SLAM3 && chmod +x build.sh && ./build.sh "
+docker exec -it orbslam3 bash -i -c  "git clone -b v0.4-beta https://github.com/UZ-SLAMLab/ORB_SLAM3.git /ORB_SLAM3 && cd /ORB_SLAM3 && chmod +x build.sh && ./build.sh "
 # Compile ORBSLAM3-ROS
-docker exec -it orbslam3 bash -i -c "echo 'ROS_PACKAGE_PATH=/opt/ros/noeti/share:/ORB_SLAM3/Examples/ROS'>>~/.bashrc && source ~/.bashrc && cd /ORB_SLAM3 && chmod +x build_ros.sh && ./build_ros.sh"
-
+docker exec -it orbslam3 bash -i -c "echo 'ROS_PACKAGE_PATH=/opt/ros/noetic/share:/ORB_SLAM3/Examples/ROS'>>~/.bashrc && source ~/.bashrc && cd /ORB_SLAM3"
